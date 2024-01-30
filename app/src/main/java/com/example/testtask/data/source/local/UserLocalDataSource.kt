@@ -11,4 +11,8 @@ class UserLocalDataSource(private val userDao: UserDao) {
     suspend fun saveUsers(users: List<User>) {
         userDao.saveList(users)
     }
+
+    suspend fun deleteAll() {
+        userDao.deleteAll()
+    }
 }

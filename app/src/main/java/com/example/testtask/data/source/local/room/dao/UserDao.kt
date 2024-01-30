@@ -12,5 +12,8 @@ interface UserDao {
 
     @Insert
     suspend fun saveList(users: List<User>)
+
+    @Query("DELETE FROM user")
+    suspend fun deleteAll()
 }
 

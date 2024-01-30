@@ -1,9 +1,12 @@
 package com.example.testtask.presentation.viewmodels
 
+import android.view.MenuItem
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.testtask.R
 import com.example.testtask.domain.models.Resource
 import com.example.testtask.domain.models.User
+import com.example.testtask.domain.usecases.DeleteSavedUsersUseCase
 import com.example.testtask.domain.usecases.GetNewUsersUseCase
 import com.example.testtask.domain.usecases.GetSavedUsersUseCase
 import com.example.testtask.domain.usecases.SaveUsersUseCase
@@ -16,7 +19,8 @@ import kotlinx.coroutines.launch
 class UserListViewModel(
     private val getNewUsersUseCase: GetNewUsersUseCase,
     private val getSavedUsersUseCase: GetSavedUsersUseCase,
-    private val saveUsersUseCase: SaveUsersUseCase
+    private val saveUsersUseCase: SaveUsersUseCase,
+    private val deleteSavedUsersUseCase: DeleteSavedUsersUseCase
 ) : ViewModel() {
     val listAdapter = UserAdapter()
 
@@ -25,6 +29,16 @@ class UserListViewModel(
 
     init {
         fetchResource()
+    }
+
+    fun onMenuItemClickListener(menuItem: MenuItem): Boolean {
+        if (menuItem.itemId == R.id.refresh) {
+            viewModelScope.launch {
+                updateUsersAndSave()
+            }
+            return true
+        }
+        return false
     }
 
     private fun fetchResource() {
@@ -44,8 +58,13 @@ class UserListViewModel(
             _newUsers.update { newUsersResource }
         }
         viewModelScope.launch {
+            deleteSavedUsers()
             saveUsers(newUsersResource)
         }
+    }
+
+    private suspend fun deleteSavedUsers() {
+        deleteSavedUsersUseCase.invoke()
     }
 
     private suspend fun saveUsers(resource: Resource<User>) {

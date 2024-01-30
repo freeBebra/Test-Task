@@ -31,6 +31,10 @@ class UsersRepositoryImpl(
         userLocalDataSource.saveUsers(list.map { it.toRoom() })
     }
 
+    override suspend fun deleteAll() {
+        userLocalDataSource.deleteAll()
+    }
+
     companion object {
         @Volatile
         private var INSTANCE: UsersRepositoryImpl? = null

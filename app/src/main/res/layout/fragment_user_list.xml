@@ -20,6 +20,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:menu="@menu/user_list_menu"
+            app:onMenuItemClickListener="@{(menuItem) -> viewModel.onMenuItemClickListener(menuItem)}"
             app:title="User list"
             app:titleCentered="true" />
 
