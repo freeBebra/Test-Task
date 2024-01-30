@@ -22,7 +22,7 @@
             android:id="@+id/icon"
             android:layout_width="56dp"
             android:layout_height="56dp"
-            app:imageBitmap="@{Converter.byteArrayToBitmap(user.thumbnail)}"
+            app:imageByUrl="@{user.thumbnailUrl}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:shapeAppearance="@style/ShapeAppearance.Rounded"
