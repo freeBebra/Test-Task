@@ -13,7 +13,6 @@ import com.example.testtask.domain.models.User
 import com.example.testtask.domain.models.UserBrief
 import com.example.testtask.domain.models.UserID
 import com.example.testtask.domain.models.UserPicture
-import kotlin.math.abs
 import com.example.testtask.data.source.local.room.models.User as RoomUser
 import com.example.testtask.data.source.local.room.models.UserBrief as RoomUserBrief
 import com.example.testtask.data.source.remote.api.models.ID as ApiID
@@ -50,6 +49,7 @@ fun Result.toUser(): User {
 
 fun RoomUserBrief.toDomain(): UserBrief {
     return UserBrief(
+        id = id,
         name = Name(titleName, firstName, lastName),
         thumbnailUrl = thumbnailUrl,
         address = Address(
@@ -129,15 +129,6 @@ fun User.toRoom(): RoomUser {
         mediumUrl = userPicture.mediumPicUrl,
         thumbnailUrl = userPicture.thumbnailUrl
     )
-}
-
-private fun Timezone.offsetToString(): String {
-    val sign = when {
-        offsetHours > 0 -> "+"
-        offsetHours < 0 -> "-"
-        else -> ""
-    }
-    return "%s%d:%02d".format(sign, abs(offsetHours), offsetMinutes)
 }
 
 private fun ApiLogin.toDomain() = LoginInfo(

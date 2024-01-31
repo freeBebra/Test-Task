@@ -27,7 +27,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:menu="@menu/user_list_menu"
             app:onMenuItemClickListener="@{(menuItem) -> viewModel.onMenuItemClickListener(menuItem)}"
-            app:title="User list"
+            app:title="@string/user_list"
             app:titleCentered="true" />
 
         <androidx.recyclerview.widget.RecyclerView

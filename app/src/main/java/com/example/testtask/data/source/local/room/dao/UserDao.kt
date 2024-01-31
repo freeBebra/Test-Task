@@ -14,8 +14,11 @@ interface UserDao {
     )
     suspend fun getListBrief(): List<UserBrief>
 
+    @Query("SELECT * FROM user WHERE id = :userId")
+    suspend fun getUser(userId: Int): User
+
     @Insert
-    suspend fun saveList(users: List<User>)
+    suspend fun saveList(users: List<User>): LongArray
 
     @Query("DELETE FROM user")
     suspend fun deleteAll()

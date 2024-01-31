@@ -9,8 +9,12 @@ class UserLocalDataSource(private val userDao: UserDao) {
         return userDao.getListBrief()
     }
 
-    suspend fun saveUsers(users: List<User>) {
-        userDao.saveList(users)
+    suspend fun getUser(userId: Int): User {
+        return userDao.getUser(userId)
+    }
+
+    suspend fun saveUsers(users: List<User>): LongArray {
+        return userDao.saveList(users)
     }
 
     suspend fun deleteAll() {

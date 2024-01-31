@@ -10,11 +10,19 @@ import com.example.testtask.R
 import com.example.testtask.databinding.ListItemUserBinding
 import com.example.testtask.domain.models.UserBrief
 
-class UserAdapter: ListAdapter<UserBrief, UserAdapter.UserViewHolder>(DiffUtilCallback()) {
+class UserAdapter : ListAdapter<UserBrief, UserAdapter.UserViewHolder>(DiffUtilCallback()) {
 
-    class UserViewHolder(view: View) : ViewHolder(view) {
+    var listener: ((view: View, userId: Int) -> Unit)? = null
+
+    inner class UserViewHolder(view: View) : ViewHolder(view) {
 
         private val binding = ListItemUserBinding.bind(view)
+
+        init {
+            view.setOnClickListener {
+                listener?.invoke(it, currentList[adapterPosition].id)
+            }
+        }
 
         fun bind(user: UserBrief) {
             binding.user = user
@@ -31,7 +39,7 @@ class UserAdapter: ListAdapter<UserBrief, UserAdapter.UserViewHolder>(DiffUtilCa
         holder.bind(currentList[position])
     }
 
-    class DiffUtilCallback: DiffUtil.ItemCallback<UserBrief>() {
+    class DiffUtilCallback : DiffUtil.ItemCallback<UserBrief>() {
         override fun areItemsTheSame(oldItem: UserBrief, newItem: UserBrief): Boolean {
             return oldItem.phone == newItem.phone
         }

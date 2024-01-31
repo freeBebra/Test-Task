@@ -1,0 +1,631 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.example.testtask.presentation.viewmodels.UserDetailsViewModel" />
+
+        <import type="com.example.testtask.utils.UtilsKt" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/materialToolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:navigationIcon="@drawable/ic_arrow_back_24"
+            app:navigationOnClickListener="@{(view) -> viewModel.onNavigationClick(view)}"
+            app:title="@string/user_details"
+            app:titleCentered="true" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context=".presentation.fragments.UserDetailsFragment">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <View
+                    android:id="@+id/top_background"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginBottom="-24dp"
+                    android:background="@drawable/shape_user_list_item"
+                    app:layout_constraintBottom_toBottomOf="@id/gender"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/icon"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:layout_margin="40dp"
+                    app:imageByUrl="@{viewModel.user.userPicture.largePicUrl}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:shapeAppearance="@style/ShapeAppearance.Rounded"
+                    tools:src="@color/black" />
+
+                <TextView
+                    android:id="@+id/name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:fontFamily="sans-serif-medium"
+                    android:text='@{viewModel.user != null ? viewModel.user.name.toString() + ` (` + viewModel.user.nationCode + `)` : "" }'
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toEndOf="@+id/icon"
+                    app:layout_constraintTop_toTopOf="@+id/icon"
+                    tools:text="Azelio Alves" />
+
+                <TextView
+                    android:id="@+id/age"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text='@{viewModel.user != null ? @string/year_with_birth_date(UtilsKt.ageFromDate(viewModel.user.dateOfBirth), UtilsKt.dateToString(viewModel.user.dateOfBirth)) : "" }'
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="@+id/name"
+                    app:layout_constraintTop_toBottomOf="@+id/name"
+                    tools:text="49 yo (1974-03-19)" />
+
+                <TextView
+                    android:id="@+id/gender"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="32dp"
+                    android:text='@{viewModel.user != null ? viewModel.user.gender.toString() : ""}'
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/name"
+                    app:layout_constraintTop_toBottomOf="@+id/age"
+                    tools:text="Male" />
+
+                <TextView
+                    android:id="@+id/group_title_contact_info"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/user_details_contact_info_group"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/top_background" />
+
+                <View
+                    android:id="@+id/contact_info_background"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="-16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginBottom="-16dp"
+                    android:background="@drawable/shape_user_list_item"
+                    app:layout_constraintBottom_toBottomOf="@id/cell_value"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/email_text" />
+
+                <TextView
+                    android:id="@+id/email_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="sans-serif-light"
+                    android:text="@string/email"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/group_title_contact_info" />
+
+                <TextView
+                    android:id="@+id/email_value"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginEnd="32dp"
+                    android:text='@{viewModel.user != null ? viewModel.user.email : "" }'
+                    android:textAlignment="viewEnd"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/email_text"
+                    app:layout_constraintTop_toTopOf="@id/email_text"
+                    tools:text="sonia.melo@example.com" />
+
+                <TextView
+                    android:id="@+id/phone_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="4dp"
+                    android:fontFamily="sans-serif-light"
+                    android:text="@string/phone"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/email_value" />
+
+                <TextView
+                    android:id="@+id/phone_value"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginEnd="32dp"
+                    android:text='@{viewModel.user != null ? viewModel.user.phone : ""}'
+                    android:textAlignment="viewEnd"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/phone_text"
+                    app:layout_constraintTop_toTopOf="@id/phone_text"
+                    tools:text="(62) 2372-1894" />
+
+                <TextView
+                    android:id="@+id/cell_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="4dp"
+                    android:fontFamily="sans-serif-light"
+                    android:text="@string/cell"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/phone_text" />
+
+                <TextView
+                    android:id="@+id/cell_value"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginEnd="32dp"
+                    android:text='@{viewModel.user != null ? viewModel.user.cell: ""}'
+                    android:textAlignment="viewEnd"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/cell_text"
+                    app:layout_constraintTop_toTopOf="@id/cell_text"
+                    tools:text="(30) 3443-5365" />
+
+                <TextView
+                    android:id="@+id/group_title_location"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/user_details_location_group"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/contact_info_background" />
+
+                <View
+                    android:id="@+id/location_background"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="-16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginBottom="-16dp"
+                    android:background="@drawable/shape_user_list_item"
+                    app:layout_constraintBottom_toBottomOf="@id/coordinates_value"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/address_text" />
+
+                <TextView
+                    android:id="@+id/address_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="sans-serif-light"
+                    android:text="@string/address"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/group_title_location" />
+
+                <TextView
+                    android:id="@+id/address_value"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginEnd="32dp"
+                    android:text='@{viewModel.user != null ? viewModel.user.location.address.toString() : ""}'
+                    android:textAlignment="viewEnd"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/address_text"
+                    app:layout_constraintTop_toTopOf="@id/address_text"
+                    tools:text="2185 Kasturba Rd Bihar Sharif, Himachal Pradesh 29540, India" />
+
+                <TextView
+                    android:id="@+id/timezone_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="4dp"
+                    android:fontFamily="sans-serif-light"
+                    android:text="@string/timezone"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/address_value" />
+
+                <TextView
+                    android:id="@+id/timezone_value"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginEnd="32dp"
+                    android:text='@{viewModel.user != null ? viewModel.user.location.coordinates.timezone.toString() : ""}'
+                    android:textAlignment="viewEnd"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/timezone_text"
+                    app:layout_constraintTop_toTopOf="@id/timezone_text"
+                    tools:text="-11:00, Midway Island, Samoa" />
+
+                <TextView
+                    android:id="@+id/coordinates_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="4dp"
+                    android:fontFamily="sans-serif-light"
+                    android:text="@string/coordinates"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/timezone_value" />
+
+                <TextView
+                    android:id="@+id/coordinates_value"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginEnd="32dp"
+                    android:text='@{viewModel.user != null ? @string/coordinates(viewModel.user.location.coordinates.longitude, viewModel.user.location.coordinates.latitude) : "" }'
+                    android:textAlignment="viewEnd"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/coordinates_text"
+                    app:layout_constraintTop_toTopOf="@id/coordinates_text"
+                    tools:text="long: 115.8351, lat: -78.5581" />
+
+                <TextView
+                    android:id="@+id/group_title_account"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/user_details_account_group"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/location_background" />
+
+                <View
+                    android:id="@+id/account_background"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="-16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginBottom="-16dp"
+                    android:background="@drawable/shape_user_list_item"
+                    app:layout_constraintBottom_toBottomOf="@id/login_uuid_value"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/id_text" />
+
+                <TextView
+                    android:id="@+id/id_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="sans-serif-light"
+                    android:text="@string/id"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/group_title_account" />
+
+                <TextView
+                    android:id="@+id/id_value"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginEnd="32dp"
+                    android:text='@{viewModel.user != null ? viewModel.user.id.toString() : "" }'
+                    android:textAlignment="viewEnd"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/id_text"
+                    app:layout_constraintTop_toTopOf="@id/id_text"
+                    tools:text="CPF 226.433.992-27" />
+
+                <TextView
+                    android:id="@+id/username_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="4dp"
+                    android:fontFamily="sans-serif-light"
+                    android:text="@string/username"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/id_value" />
+
+                <TextView
+                    android:id="@+id/username_value"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginEnd="32dp"
+                    android:text='@{viewModel.user != null ? viewModel.user.loginInfo.username : "" }'
+                    android:textAlignment="viewEnd"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/username_text"
+                    app:layout_constraintTop_toTopOf="@id/username_text"
+                    tools:text="bluepeacock755" />
+
+                <TextView
+                    android:id="@+id/registered_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="4dp"
+                    android:fontFamily="sans-serif-light"
+                    android:text="@string/registered"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/username_value" />
+
+                <TextView
+                    android:id="@+id/registered_value"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginEnd="32dp"
+                    android:text='@{viewModel.user != null ? UtilsKt.dateToString(viewModel.user.registerDate) : "" }'
+                    android:textAlignment="viewEnd"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/registered_text"
+                    app:layout_constraintTop_toTopOf="@id/registered_text"
+                    tools:text="2006-04-04" />
+
+                <TextView
+                    android:id="@+id/login_uuid_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="4dp"
+                    android:fontFamily="sans-serif-light"
+                    android:text="@string/login_uuid"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/registered_value" />
+
+                <TextView
+                    android:id="@+id/login_uuid_value"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginEnd="32dp"
+                    android:text='@{viewModel.user != null ? viewModel.user.loginInfo.uuid : "" }'
+                    android:textAlignment="viewEnd"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/login_uuid_text"
+                    app:layout_constraintTop_toTopOf="@id/login_uuid_text"
+                    tools:text="e9a0768e-32e0-4295-b873-cb83ca345c32" />
+
+                <TextView
+                    android:id="@+id/group_title_security"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/user_details_security_group"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/account_background" />
+
+                <View
+                    android:id="@+id/security_background"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="-16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginBottom="-16dp"
+                    android:background="@drawable/shape_user_list_item"
+                    app:layout_constraintBottom_toBottomOf="@id/sha256_value"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/password_text" />
+
+                <TextView
+                    android:id="@+id/password_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="sans-serif-light"
+                    android:text="@string/password"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/group_title_security" />
+
+                <TextView
+                    android:id="@+id/password_value"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginEnd="32dp"
+                    android:text='@{viewModel.user != null ? viewModel.user.loginInfo.password : "" }'
+                    android:textAlignment="viewEnd"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/password_text"
+                    app:layout_constraintTop_toTopOf="@id/password_text"
+                    tools:text="hopeful" />
+
+                <TextView
+                    android:id="@+id/salt_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="4dp"
+                    android:fontFamily="sans-serif-light"
+                    android:text="@string/salt"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/password_value" />
+
+                <TextView
+                    android:id="@+id/salt_value"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginEnd="32dp"
+                    android:text='@{viewModel.user != null ? viewModel.user.loginInfo.salt : "" }'
+                    android:textAlignment="viewEnd"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/salt_text"
+                    app:layout_constraintTop_toTopOf="@id/salt_text"
+                    tools:text="i6ciJv7I" />
+
+                <TextView
+                    android:id="@+id/md5_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="4dp"
+                    android:fontFamily="sans-serif-light"
+                    android:text="@string/md5"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/salt_value" />
+
+                <TextView
+                    android:id="@+id/md5_value"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginEnd="32dp"
+                    android:text='@{viewModel.user != null ? viewModel.user.loginInfo.md5: "" }'
+                    android:textAlignment="viewEnd"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/md5_text"
+                    app:layout_constraintTop_toTopOf="@id/md5_text"
+                    tools:text="7966790d4beb00069ba3b7e74d77fad9" />
+
+                <TextView
+                    android:id="@+id/sha1_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="4dp"
+                    android:fontFamily="sans-serif-light"
+                    android:text="@string/sha1"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/md5_value" />
+
+                <TextView
+                    android:id="@+id/sha1_value"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginEnd="32dp"
+                    android:text='@{viewModel.user != null ? viewModel.user.loginInfo.sha1: "" }'
+                    android:textAlignment="viewEnd"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/sha1_text"
+                    app:layout_constraintTop_toTopOf="@id/sha1_text"
+                    tools:text="6b137b655ba83fe1c4723fdf9a09c8d4a6bf5ce1" />
+
+                <TextView
+                    android:id="@+id/sha256_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="4dp"
+                    android:fontFamily="sans-serif-light"
+                    android:text="@string/sha256"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/sha1_value" />
+
+                <TextView
+                    android:id="@+id/sha256_value"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginEnd="32dp"
+                    android:text='@{viewModel.user != null ? viewModel.user.loginInfo.sha256: "" }'
+                    android:textAlignment="viewEnd"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/sha256_text"
+                    app:layout_constraintTop_toTopOf="@id/sha256_text"
+                    tools:text="6b137b655ba83fe1c4723fdf9a09c8d4a6bf5ce1" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </ScrollView>
+
+    </LinearLayout>
+</layout>

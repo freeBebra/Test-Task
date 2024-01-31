@@ -10,7 +10,10 @@ import com.example.testtask.presentation.recyclerview.adapter.UserAdapter
 import com.google.android.material.snackbar.Snackbar
 
 @BindingAdapter("app:imageByUrl")
-fun setUrlImageToView(imageView: ImageView, url: String) {
+fun setUrlImageToView(imageView: ImageView, url: String?) {
+    if (url == null) {
+        return
+    }
     Glide.with(imageView).load(url).into(imageView)
 }
 
@@ -23,7 +26,7 @@ fun View.showSnackbarOnError(uiState: UserListUiState) {
 
 @BindingAdapter("app:userListOnUpdate")
 fun RecyclerView.setUserListOnUpdate(uiState: UserListUiState) {
-    if (uiState is UserListUiState.Data) {
+    if (uiState is UserListUiState.NewUsers) {
         val userAdapter = adapter as? UserAdapter
         userAdapter?.submitList(uiState.userList)
     }

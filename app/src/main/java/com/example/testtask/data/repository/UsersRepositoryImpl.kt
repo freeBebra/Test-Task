@@ -29,13 +29,18 @@ class UsersRepositoryImpl(
         return userLocalDataSource.getUsersBrief().map { it.toDomain() }
     }
 
-    override suspend fun save(list: List<User>) {
-        userLocalDataSource.saveUsers(list.map { it.toRoom() })
+    override suspend fun save(list: List<User>): List<Int> {
+        return userLocalDataSource.saveUsers(list.map { it.toRoom() }).map { it.toInt() }
     }
 
     override suspend fun deleteAll() {
         userLocalDataSource.deleteAll()
     }
+
+    override suspend fun getUser(userId: Int): User {
+        return userLocalDataSource.getUser(userId).toDomain()
+    }
+
 
     companion object {
         @Volatile
