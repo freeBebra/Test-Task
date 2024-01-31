@@ -9,7 +9,7 @@ import com.example.testtask.domain.models.SimpleDate
 @Entity(tableName = TABLE_NAME)
 data class User(
     @PrimaryKey(autoGenerate = true)
-    val id: Int? = null,
+    val id: Int = 0,
     val gender: Gender,
     val email: String,
     val loginUuid: String,

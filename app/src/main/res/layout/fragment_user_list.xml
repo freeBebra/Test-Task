@@ -7,11 +7,16 @@
         <variable
             name="viewModel"
             type="com.example.testtask.presentation.viewmodels.UserListViewModel" />
+
+        <import type="com.example.testtask.presentation.models.UserListUiState" />
+
+        <import type="android.view.View" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        app:showSnackbarOnError="@{viewModel.uiState}">
 
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/materialToolbar"
@@ -33,12 +38,25 @@
             android:layout_marginRight="16dp"
             android:adapter="@{viewModel.listAdapter}"
             android:orientation="vertical"
+            app:alpha="@{viewModel.uiState instanceof UserListUiState.Loading ? 0.5f : 1.0f}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/materialToolbar"
-            app:layout_constraintWidth_max="400dp" />
+            app:layout_constraintWidth_max="400dp"
+            app:userListOnUpdate="@{viewModel.uiState}" />
+
+        <androidx.core.widget.ContentLoadingProgressBar
+            android:id="@+id/loading_progress_bar"
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/materialToolbar"
+            app:visibility="@{viewModel.uiState instanceof UserListUiState.Loading ? View.VISIBLE : View.GONE}" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

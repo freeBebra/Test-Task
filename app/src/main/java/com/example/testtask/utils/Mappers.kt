@@ -15,6 +15,7 @@ import com.example.testtask.domain.models.UserID
 import com.example.testtask.domain.models.UserPicture
 import kotlin.math.abs
 import com.example.testtask.data.source.local.room.models.User as RoomUser
+import com.example.testtask.data.source.local.room.models.UserBrief as RoomUserBrief
 import com.example.testtask.data.source.remote.api.models.ID as ApiID
 import com.example.testtask.data.source.remote.api.models.Location as ApiLocation
 import com.example.testtask.data.source.remote.api.models.Login as ApiLogin
@@ -44,6 +45,21 @@ fun Result.toUser(): User {
         cell = cell,
         dateOfBirth = parseDate(birthDate.date),
         registerDate = parseDate(registerDate.date)
+    )
+}
+
+fun RoomUserBrief.toDomain(): UserBrief {
+    return UserBrief(
+        name = Name(titleName, firstName, lastName),
+        thumbnailUrl = thumbnailUrl,
+        address = Address(
+            Street(streetName, streetNumber),
+            city,
+            state,
+            country,
+            postcode
+        ),
+        phone = phone
     )
 }
 
@@ -80,7 +96,6 @@ fun RoomUser.toDomain(): User {
 
 fun User.toRoom(): RoomUser {
     return RoomUser(
-        id = null,
         gender = gender,
         email = email,
         loginUuid = loginInfo.uuid,
