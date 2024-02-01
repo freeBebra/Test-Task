@@ -27,7 +27,8 @@
             app:navigationIcon="@drawable/ic_arrow_back_24"
             app:navigationOnClickListener="@{(view) -> viewModel.onNavigationClick(view)}"
             app:title="@string/user_details"
-            app:titleCentered="true" />
+            app:titleCentered="true"
+            app:titleTextColor="@color/user_text_color" />
 
         <ScrollView
             android:layout_width="match_parent"
@@ -70,6 +71,7 @@
                     android:layout_marginStart="24dp"
                     android:fontFamily="sans-serif-medium"
                     android:text='@{viewModel.user != null ? viewModel.user.name.toString() + ` (` + viewModel.user.nationCode + `)` : "" }'
+                    android:textColor="@color/user_text_color"
                     android:textSize="16sp"
                     app:layout_constraintStart_toEndOf="@+id/icon"
                     app:layout_constraintTop_toTopOf="@+id/icon"
@@ -80,6 +82,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text='@{viewModel.user != null ? @string/year_with_birth_date(UtilsKt.ageFromDate(viewModel.user.dateOfBirth), UtilsKt.dateToString(viewModel.user.dateOfBirth)) : "" }'
+                    android:textColor="@color/user_text_color"
                     android:textSize="16sp"
                     app:layout_constraintStart_toStartOf="@+id/name"
                     app:layout_constraintTop_toBottomOf="@+id/name"
@@ -93,6 +96,7 @@
                     android:layout_marginEnd="16dp"
                     android:layout_marginBottom="32dp"
                     android:text='@{viewModel.user != null ? viewModel.user.gender.toString() : ""}'
+                    android:textColor="@color/user_text_color"
                     android:textSize="14sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/name"
@@ -106,7 +110,7 @@
                     android:layout_marginStart="32dp"
                     android:layout_marginTop="16dp"
                     android:text="@string/user_details_contact_info_group"
-                    android:textColor="@color/black"
+                    android:textColor="@color/user_text_color"
                     android:textSize="16sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/top_background" />
@@ -127,19 +131,18 @@
 
                 <TextView
                     android:id="@+id/email_text"
+                    style="@style/TextAppearance.Widget.UserDetails.Section.Title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="32dp"
                     android:layout_marginTop="20dp"
-                    android:fontFamily="sans-serif-light"
                     android:text="@string/email"
-                    android:textColor="@color/black"
-                    android:textSize="16sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/group_title_contact_info" />
 
                 <TextView
                     android:id="@+id/email_value"
+                    style="@style/TextAppearance.Widget.UserDetails.Section.Value"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="12dp"
@@ -147,9 +150,6 @@
                     android:autoLink="email"
                     android:linksClickable="true"
                     android:text='@{viewModel.user != null ? viewModel.user.email : "" }'
-                    android:textAlignment="viewEnd"
-                    android:textColor="@color/black"
-                    android:textSize="15sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/email_text"
                     app:layout_constraintTop_toTopOf="@id/email_text"
@@ -157,19 +157,18 @@
 
                 <TextView
                     android:id="@+id/phone_text"
+                    style="@style/TextAppearance.Widget.UserDetails.Section.Title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="32dp"
                     android:layout_marginTop="4dp"
-                    android:fontFamily="sans-serif-light"
                     android:text="@string/phone"
-                    android:textColor="@color/black"
-                    android:textSize="16sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/email_value" />
 
                 <TextView
                     android:id="@+id/phone_value"
+                    style="@style/TextAppearance.Widget.UserDetails.Section.Value"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="12dp"
@@ -177,9 +176,6 @@
                     android:autoLink="phone"
                     android:linksClickable="true"
                     android:text='@{viewModel.user != null ? viewModel.user.phone : ""}'
-                    android:textAlignment="viewEnd"
-                    android:textColor="@color/black"
-                    android:textSize="15sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/phone_text"
                     app:layout_constraintTop_toTopOf="@id/phone_text"
@@ -187,19 +183,18 @@
 
                 <TextView
                     android:id="@+id/cell_text"
+                    style="@style/TextAppearance.Widget.UserDetails.Section.Title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="32dp"
                     android:layout_marginTop="4dp"
-                    android:fontFamily="sans-serif-light"
                     android:text="@string/cell"
-                    android:textColor="@color/black"
-                    android:textSize="16sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/phone_text" />
 
                 <TextView
                     android:id="@+id/cell_value"
+                    style="@style/TextAppearance.Widget.UserDetails.Section.Value"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="12dp"
@@ -207,9 +202,6 @@
                     android:autoLink="phone"
                     android:linksClickable="true"
                     android:text='@{viewModel.user != null ? viewModel.user.cell: ""}'
-                    android:textAlignment="viewEnd"
-                    android:textColor="@color/black"
-                    android:textSize="15sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/cell_text"
                     app:layout_constraintTop_toTopOf="@id/cell_text"
@@ -222,7 +214,7 @@
                     android:layout_marginStart="32dp"
                     android:layout_marginTop="16dp"
                     android:text="@string/user_details_location_group"
-                    android:textColor="@color/black"
+                    android:textColor="@color/user_text_color"
                     android:textSize="16sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/contact_info_background" />
@@ -243,28 +235,24 @@
 
                 <TextView
                     android:id="@+id/address_text"
+                    style="@style/TextAppearance.Widget.UserDetails.Section.Title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="32dp"
                     android:layout_marginTop="20dp"
-                    android:fontFamily="sans-serif-light"
                     android:text="@string/address"
-                    android:textColor="@color/black"
-                    android:textSize="16sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/group_title_location" />
 
                 <TextView
                     android:id="@+id/address_value"
+                    style="@style/TextAppearance.Widget.UserDetails.Section.Value"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="12dp"
                     android:layout_marginEnd="32dp"
                     android:onClick="@{(view) -> viewModel.onAddressClick(view)}"
                     android:text='@{viewModel.user != null ? viewModel.user.location.address.toString() : ""}'
-                    android:textAlignment="viewEnd"
-                    android:textColor="@color/black"
-                    android:textSize="15sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/address_text"
                     app:layout_constraintTop_toTopOf="@id/address_text"
@@ -272,27 +260,23 @@
 
                 <TextView
                     android:id="@+id/timezone_text"
+                    style="@style/TextAppearance.Widget.UserDetails.Section.Title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="32dp"
                     android:layout_marginTop="4dp"
-                    android:fontFamily="sans-serif-light"
                     android:text="@string/timezone"
-                    android:textColor="@color/black"
-                    android:textSize="16sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/address_value" />
 
                 <TextView
                     android:id="@+id/timezone_value"
+                    style="@style/TextAppearance.Widget.UserDetails.Section.Value"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="12dp"
                     android:layout_marginEnd="32dp"
                     android:text='@{viewModel.user != null ? viewModel.user.location.coordinates.timezone.toString() : ""}'
-                    android:textAlignment="viewEnd"
-                    android:textColor="@color/black"
-                    android:textSize="15sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/timezone_text"
                     app:layout_constraintTop_toTopOf="@id/timezone_text"
@@ -300,28 +284,24 @@
 
                 <TextView
                     android:id="@+id/coordinates_text"
+                    style="@style/TextAppearance.Widget.UserDetails.Section.Title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="32dp"
                     android:layout_marginTop="4dp"
-                    android:fontFamily="sans-serif-light"
                     android:text="@string/coordinates"
-                    android:textColor="@color/black"
-                    android:textSize="16sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/timezone_value" />
 
                 <TextView
                     android:id="@+id/coordinates_value"
+                    style="@style/TextAppearance.Widget.UserDetails.Section.Value"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="12dp"
-                    android:onClick="@{(view) -> viewModel.onCoordinatesClick(view)}"
                     android:layout_marginEnd="32dp"
+                    android:onClick="@{(view) -> viewModel.onCoordinatesClick(view)}"
                     android:text='@{viewModel.user != null ? @string/coordinates_value(viewModel.user.location.coordinates.longitude, viewModel.user.location.coordinates.latitude) : "" }'
-                    android:textAlignment="viewEnd"
-                    android:textColor="@color/black"
-                    android:textSize="15sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/coordinates_text"
                     app:layout_constraintTop_toTopOf="@id/coordinates_text"
@@ -334,7 +314,7 @@
                     android:layout_marginStart="32dp"
                     android:layout_marginTop="16dp"
                     android:text="@string/user_details_account_group"
-                    android:textColor="@color/black"
+                    android:textColor="@color/user_text_color"
                     android:textSize="16sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/location_background" />
@@ -355,27 +335,23 @@
 
                 <TextView
                     android:id="@+id/id_text"
+                    style="@style/TextAppearance.Widget.UserDetails.Section.Title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="32dp"
                     android:layout_marginTop="20dp"
-                    android:fontFamily="sans-serif-light"
                     android:text="@string/id"
-                    android:textColor="@color/black"
-                    android:textSize="16sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/group_title_account" />
 
                 <TextView
                     android:id="@+id/id_value"
+                    style="@style/TextAppearance.Widget.UserDetails.Section.Value"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="12dp"
                     android:layout_marginEnd="32dp"
                     android:text='@{viewModel.user != null ? viewModel.user.id.toString() : "" }'
-                    android:textAlignment="viewEnd"
-                    android:textColor="@color/black"
-                    android:textSize="15sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/id_text"
                     app:layout_constraintTop_toTopOf="@id/id_text"
@@ -383,27 +359,23 @@
 
                 <TextView
                     android:id="@+id/username_text"
+                    style="@style/TextAppearance.Widget.UserDetails.Section.Title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="32dp"
                     android:layout_marginTop="4dp"
-                    android:fontFamily="sans-serif-light"
                     android:text="@string/username"
-                    android:textColor="@color/black"
-                    android:textSize="16sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/id_value" />
 
                 <TextView
                     android:id="@+id/username_value"
+                    style="@style/TextAppearance.Widget.UserDetails.Section.Value"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="12dp"
                     android:layout_marginEnd="32dp"
                     android:text='@{viewModel.user != null ? viewModel.user.loginInfo.username : "" }'
-                    android:textAlignment="viewEnd"
-                    android:textColor="@color/black"
-                    android:textSize="15sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/username_text"
                     app:layout_constraintTop_toTopOf="@id/username_text"
@@ -411,27 +383,23 @@
 
                 <TextView
                     android:id="@+id/registered_text"
+                    style="@style/TextAppearance.Widget.UserDetails.Section.Title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="32dp"
                     android:layout_marginTop="4dp"
-                    android:fontFamily="sans-serif-light"
                     android:text="@string/registered"
-                    android:textColor="@color/black"
-                    android:textSize="16sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/username_value" />
 
                 <TextView
                     android:id="@+id/registered_value"
+                    style="@style/TextAppearance.Widget.UserDetails.Section.Value"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="12dp"
                     android:layout_marginEnd="32dp"
                     android:text='@{viewModel.user != null ? UtilsKt.dateToString(viewModel.user.registerDate) : "" }'
-                    android:textAlignment="viewEnd"
-                    android:textColor="@color/black"
-                    android:textSize="15sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/registered_text"
                     app:layout_constraintTop_toTopOf="@id/registered_text"
@@ -439,27 +407,23 @@
 
                 <TextView
                     android:id="@+id/login_uuid_text"
+                    style="@style/TextAppearance.Widget.UserDetails.Section.Title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="32dp"
                     android:layout_marginTop="4dp"
-                    android:fontFamily="sans-serif-light"
                     android:text="@string/login_uuid"
-                    android:textColor="@color/black"
-                    android:textSize="16sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/registered_value" />
 
                 <TextView
                     android:id="@+id/login_uuid_value"
+                    style="@style/TextAppearance.Widget.UserDetails.Section.Value"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="12dp"
                     android:layout_marginEnd="32dp"
                     android:text='@{viewModel.user != null ? viewModel.user.loginInfo.uuid : "" }'
-                    android:textAlignment="viewEnd"
-                    android:textColor="@color/black"
-                    android:textSize="15sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/login_uuid_text"
                     app:layout_constraintTop_toTopOf="@id/login_uuid_text"
@@ -472,7 +436,7 @@
                     android:layout_marginStart="32dp"
                     android:layout_marginTop="16dp"
                     android:text="@string/user_details_security_group"
-                    android:textColor="@color/black"
+                    android:textColor="@color/user_text_color"
                     android:textSize="16sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/account_background" />
@@ -493,27 +457,23 @@
 
                 <TextView
                     android:id="@+id/password_text"
+                    style="@style/TextAppearance.Widget.UserDetails.Section.Title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="32dp"
                     android:layout_marginTop="20dp"
-                    android:fontFamily="sans-serif-light"
                     android:text="@string/password"
-                    android:textColor="@color/black"
-                    android:textSize="16sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/group_title_security" />
 
                 <TextView
                     android:id="@+id/password_value"
+                    style="@style/TextAppearance.Widget.UserDetails.Section.Value"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="12dp"
                     android:layout_marginEnd="32dp"
                     android:text='@{viewModel.user != null ? viewModel.user.loginInfo.password : "" }'
-                    android:textAlignment="viewEnd"
-                    android:textColor="@color/black"
-                    android:textSize="15sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/password_text"
                     app:layout_constraintTop_toTopOf="@id/password_text"
@@ -521,27 +481,23 @@
 
                 <TextView
                     android:id="@+id/salt_text"
+                    style="@style/TextAppearance.Widget.UserDetails.Section.Title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="32dp"
                     android:layout_marginTop="4dp"
-                    android:fontFamily="sans-serif-light"
                     android:text="@string/salt"
-                    android:textColor="@color/black"
-                    android:textSize="16sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/password_value" />
 
                 <TextView
                     android:id="@+id/salt_value"
+                    style="@style/TextAppearance.Widget.UserDetails.Section.Value"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="12dp"
                     android:layout_marginEnd="32dp"
                     android:text='@{viewModel.user != null ? viewModel.user.loginInfo.salt : "" }'
-                    android:textAlignment="viewEnd"
-                    android:textColor="@color/black"
-                    android:textSize="15sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/salt_text"
                     app:layout_constraintTop_toTopOf="@id/salt_text"
@@ -549,27 +505,23 @@
 
                 <TextView
                     android:id="@+id/md5_text"
+                    style="@style/TextAppearance.Widget.UserDetails.Section.Title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="32dp"
                     android:layout_marginTop="4dp"
-                    android:fontFamily="sans-serif-light"
                     android:text="@string/md5"
-                    android:textColor="@color/black"
-                    android:textSize="16sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/salt_value" />
 
                 <TextView
                     android:id="@+id/md5_value"
+                    style="@style/TextAppearance.Widget.UserDetails.Section.Value"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="12dp"
                     android:layout_marginEnd="32dp"
                     android:text='@{viewModel.user != null ? viewModel.user.loginInfo.md5: "" }'
-                    android:textAlignment="viewEnd"
-                    android:textColor="@color/black"
-                    android:textSize="15sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/md5_text"
                     app:layout_constraintTop_toTopOf="@id/md5_text"
@@ -577,27 +529,23 @@
 
                 <TextView
                     android:id="@+id/sha1_text"
+                    style="@style/TextAppearance.Widget.UserDetails.Section.Title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="32dp"
                     android:layout_marginTop="4dp"
-                    android:fontFamily="sans-serif-light"
                     android:text="@string/sha1"
-                    android:textColor="@color/black"
-                    android:textSize="16sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/md5_value" />
 
                 <TextView
                     android:id="@+id/sha1_value"
+                    style="@style/TextAppearance.Widget.UserDetails.Section.Value"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="12dp"
                     android:layout_marginEnd="32dp"
                     android:text='@{viewModel.user != null ? viewModel.user.loginInfo.sha1: "" }'
-                    android:textAlignment="viewEnd"
-                    android:textColor="@color/black"
-                    android:textSize="15sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/sha1_text"
                     app:layout_constraintTop_toTopOf="@id/sha1_text"
@@ -605,27 +553,23 @@
 
                 <TextView
                     android:id="@+id/sha256_text"
+                    style="@style/TextAppearance.Widget.UserDetails.Section.Title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="32dp"
                     android:layout_marginTop="4dp"
-                    android:fontFamily="sans-serif-light"
                     android:text="@string/sha256"
-                    android:textColor="@color/black"
-                    android:textSize="16sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/sha1_value" />
 
                 <TextView
                     android:id="@+id/sha256_value"
+                    style="@style/TextAppearance.Widget.UserDetails.Section.Value"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="12dp"
                     android:layout_marginEnd="32dp"
                     android:text='@{viewModel.user != null ? viewModel.user.loginInfo.sha256: "" }'
-                    android:textAlignment="viewEnd"
-                    android:textColor="@color/black"
-                    android:textSize="15sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/sha256_text"
                     app:layout_constraintTop_toTopOf="@id/sha256_text"

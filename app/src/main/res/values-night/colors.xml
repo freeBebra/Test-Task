@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
-    <color name="default_surface_color">@color/white</color>
-    <color name="default_on_surface_color">@color/black</color>
+    <color name="default_surface_color">@color/black</color>
+    <color name="default_on_surface_color">@color/white</color>
     <color name="user_container_color">@color/default_surface_color</color>
     <color name="user_text_color">@color/default_on_surface_color</color>
 </resources>

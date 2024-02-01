@@ -26,6 +26,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:menu="@menu/user_list_menu"
+            app:titleTextColor="@color/user_text_color"
             app:onMenuItemClickListener="@{(menuItem) -> viewModel.onMenuItemClickListener(menuItem)}"
             app:title="@string/user_list"
             app:titleCentered="true" />
